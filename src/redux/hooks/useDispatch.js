@@ -1,10 +1,13 @@
-import { ReduxContext } from "../context"
+import { useContext } from "react"
+import { ReduxContext } from "../../context"
+import { useStore as useDefaultStore } from "./useStore"
+
 export function useReduxContextDefault() {
     const contextValue = useContext(ReduxContext)
     return contextValue
 }
 
-  
+   
 export function createStoreHook(context = ReduxContext) {
     const useReduxContext = context === ReduxContext ? useReduxContextDefault : () => useContext(context)
     return function useStore() {
@@ -18,7 +21,7 @@ export function createDispatchHook(context = ReduxContext) {
         context === ReduxContext ? useDefaultStore : createStoreHook(context)
 
     return function useDispatch() {
-        const store = useStore()
+        const store = useStore() 
         return store.dispatch
     }
 }

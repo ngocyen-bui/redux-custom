@@ -1,19 +1,19 @@
 
 
 
-export default function createStore(reducer, preloadedState){ 
+export default function createStore(reducer){  
     if(typeof(reducer) !== 'function'){
         throw new Error('Reducer phải là function')
     }
-        
-    let currentReducer = reducer;
-    let currentState = preloadedState
+
+    let currentReducer = reducer; 
+    let currentState = reducer()
     let currentListeners = [];
-    let nextListeners = currentListeners
+    let nextListeners = currentListeners  
     function getState(){
         return currentState
     }
-    function dispatch(action){ 
+    function dispatch(action){  
         currentState = currentReducer(currentState, action) 
         const listeners = (currentListeners = nextListeners)
         for (let i = 0; i < listeners.length; i++) {

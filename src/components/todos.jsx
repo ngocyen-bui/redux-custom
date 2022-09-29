@@ -1,4 +1,15 @@
+import { addTodo } from "../actions";
+import { useDispatch } from "../redux/hooks/useDispatch";
+import { useSelector } from "../redux/hooks/useSelector";
+
 export default function Todos(){
+	const selector = useSelector(state => state.todos)
+	const dispatch = useDispatch();
+	const handleClearFilter = ()=>{
+		dispatch(addTodo('Hi')) 
+		
+	}
+	console.log(selector);
     return (
         <>
         <section className="main">
@@ -42,7 +53,7 @@ export default function Todos(){
 					</li>
 				</ul>
 				{/* <!-- Hidden if no completed items are left ↓ --> */}
-				<button className="clear-completed">Clear completed</button>
+				<button className="clear-completed" onClick={handleClearFilter}>Clear completed</button>
 			</footer>
         </>
     )
