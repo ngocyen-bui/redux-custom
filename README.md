@@ -3,9 +3,7 @@
     a) getState: lấy object state trong store 
     b) dispatch: function dùng để chạy action 
     c) subscribe: function dùng để đăng ký hành động 
-### 2 - Hàm combineReducer dùng để kết hợp các reducers 
-    
-- function combination: cập nhật state theo action trong reducer
+### 2 - Hàm combineReducer dùng để kết hợp các reducers
 ### 3 - Component Provider
 ### 4 - Hook useStore: Trả về function useStoreHook là một hàm trả về func useStore trả về store hiện tại
 ### 5 - Hook useDispatch: Nhận vào một context và chạy hàm dispatch trong store đã khởi tạo bên trên 
