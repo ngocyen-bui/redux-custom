@@ -1,5 +1,8 @@
 
- 
+ // Hàm này dùng để làm gì ?
+ // Dùng để kết hợp các Reducer lại với nhau thành 1. và trả về function 
+ // Nó trả về hàm combination => nhận vào 2 đối số là state và action 
+
 
 export default function combineReducers(reducers) {
     // Lấy danh sách Key từ Obj reducer truyền vào 
@@ -15,6 +18,8 @@ export default function combineReducers(reducers) {
       }
     }
     const finalReducerKeys = Object.keys(finalReducers)   
+
+    //
     return function combination(
       state= {},
       action
@@ -27,11 +32,11 @@ export default function combineReducers(reducers) {
         // Lấy reducer qua key
         const reducer = finalReducers[key]
         const previousStateForKey = state[key] 
-        const nextStateForKey = reducer(previousStateForKey, action)
+        const nextStateForKey = reducer(previousStateForKey, action) 
 
         nextState[key] = nextStateForKey
         hasChanged = hasChanged || nextStateForKey !== previousStateForKey
-      }
+      }  
       hasChanged =
         hasChanged || finalReducerKeys.length !== Object.keys(state).length;
       return hasChanged ? nextState : state

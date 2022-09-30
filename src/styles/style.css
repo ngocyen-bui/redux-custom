@@ -301,7 +301,7 @@ body {
 	display: inline;
 }
 
-.filters li a {
+.filters li span {
 	color: inherit;
 	margin: 3px;
 	padding: 3px 7px;
@@ -310,11 +310,12 @@ body {
 	border-radius: 3px;
 }
 
-.filters li a:hover {
+.filters li span:hover {
 	border-color: rgba(175, 47, 47, 0.1);
+	cursor: pointer;
 }
 
-.filters li a.selected {
+.filters li span.selected {
 	border-color: rgba(175, 47, 47, 0.2);
 }
 
@@ -352,7 +353,9 @@ html .clear-completed:active {
 .info a:hover {
 	text-decoration: underline;
 }
-
+.hidden{
+	display: none;
+}
 /*
 	Hack to remove background from Mobile Safari.
 	Can't use it globally since it destroys checkboxes in Firefox

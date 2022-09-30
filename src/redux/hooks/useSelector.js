@@ -3,37 +3,36 @@ import { ReduxContext } from "../../context";
 import { createSubscription } from "../utils/Subscription";
 import { useReduxContextDefault } from "./useDispatch";
 
-const refEquality = (a, b) => a === b;
 
 function useSelectorWithStoreAndSubscription(
   selector,
-  equalityFn,
-  store,
-  contextSub
+  store
 ) {
+  //Dùng reducer để rerender 
   const [, forceRender] = useReducer((s) => s + 1, 0);
 
   const subscription = useMemo(
-    () => createSubscription(store, contextSub),
-    [store, contextSub]
+    () => createSubscription(store),
+    [store]
   );
   const latestSelector = useRef();
   const latestStoreState = useRef();
   const latestSelectedState = useRef();
 
+  // Lấy object state từ store 
   const storeState = store.getState();
   let selectedState;
 
   try {
     //kiểm tra selector và state hiện tại có đang trùng với dữ liệu mới nhất không?
+     // Nếu trùng thì không hoạt động và trả về select cũ 
     if (
       selector !== latestSelector.current ||
       storeState !== latestStoreState.current
     ) {
       const newSelectedState = selector(storeState);
       if (
-        latestSelectedState.current === undefined ||
-        !equalityFn(newSelectedState, latestSelectedState.current)
+        latestSelectedState.current === undefined 
       ) {
         selectedState = newSelectedState;
       } else {
@@ -83,14 +82,12 @@ export function createSelectorHook(context = ReduxContext) {
     context === ReduxContext
       ? useReduxContextDefault
       : () => useContext(context);
-  return function useSelector(selector, equalityFn = refEquality) {
-    const { store, subscription: contextSub } = useReduxContext();
+  return function useSelector(selector) {
+    const { store } = useReduxContext();
 
     const selectedState = useSelectorWithStoreAndSubscription(
       selector,
-      equalityFn,
       store,
-      contextSub
     );
 
     return selectedState;
