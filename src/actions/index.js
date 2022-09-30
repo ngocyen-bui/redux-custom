@@ -9,18 +9,22 @@ const toggleTodo = id => ({
   type: 'TOGGLE_TODO',
   id
 })
-
+const destroyTodo = id => ({
+  type: 'DESTROY_TODO',
+  id
+})
 const editTodo = (id, text) => ({
   type: 'EDIT_TODO',
   id,
   text
 })
 
-const completedAll = () => ({
-  type: 'COMPLETED_ALL',
+const toggleAll = (checked) => ({
+  type: 'TOGGLE_ALL',
+  completed: checked
 })
-const clearAllTodo = () => ({ type: 'CLEAR_ALL_TODO' })
+const clearCompleted = () => ({ type: 'CLEAR_ALL_COMPLETED' })
 
-const filterAll = () => ({ type: 'ALL' })
+const filterTodos = (filter) => ({ type: 'FILTER', filter: filter })
 
-export { addTodo, toggleTodo, editTodo, clearAllTodo, completedAll, filterAll }
+export { addTodo, toggleTodo, editTodo, clearCompleted, toggleAll, filterTodos, destroyTodo }

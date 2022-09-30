@@ -1,10 +1,10 @@
 import { addTodo } from "../actions"
-import { useDispatch } from "../redux/hooks/useDispatch"
+import { useDispatch } from "../redux/hooks/useDispatch" 
 
 export default function Header(){
-    const dispatch = useDispatch()
+    const dispatch = useDispatch() 
     const handleAddTodo = (e)=>{
-      if(e.keyCode === 13){ 
+      if(e.keyCode === 13 && e.target.value.trim() !== ""){ 
         dispatch(addTodo(e.target.value))
         e.target.value = ''
       }
